@@ -1,0 +1,37 @@
+{
+  "name": "mental-health-journal",
+  "version": "1.0.0",
+  "description": "Modern online mental health journal with mood tracking and AI support",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "framer-motion": "^10.16.4",
+    "styled-components": "^6.1.0",
+    "date-fns": "^2.30.0",
+    "react-router-dom": "^6.8.1",
+    "recharts": "^2.8.0",
+    "lucide-react": "^0.294.0",
+    "react-hook-form": "^7.48.2",
+    "zustand": "^4.4.6",
+    "crypto-js": "^4.2.0",
+    "react-hot-toast": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@types/crypto-js": "^4.2.1",
+    "@vitejs/plugin-react": "^4.1.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
+  },
+  "keywords": ["react", "mental-health", "journal", "mood-tracking", "typescript"],
+  "author": "Your Name",
+  "license": "MIT"
+}

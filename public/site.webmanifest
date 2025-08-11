@@ -1,0 +1,16 @@
+{
+  "name": "Ментальный дневник",
+  "short_name": "Дневник",
+  "description": "Онлайн-дневник для отслеживания психического здоровья и настроения",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "./heart.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
