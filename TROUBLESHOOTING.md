@@ -1,8 +1,20 @@
 # Устранение неполадок при деплое
 
-## Ошибка "The process '/usr/bin/git' failed with exit code 128"
+## Ошибки при деплое
+
+### Ошибка "The process '/usr/bin/git' failed with exit code 128"
 
 Эта ошибка обычно возникает из-за проблем с правами доступа. Исправлено в обновленном workflow.
+
+### Ошибка "Missing environment. Ensure your workflow's deployment job has an environment"
+
+Эта ошибка возникает из-за отсутствия environment в workflow. Исправлено добавлением:
+
+```yaml
+environment:
+  name: github-pages
+  url: ${{ steps.deployment.outputs.page_url }}
+```
 
 ### Что было исправлено:
 
@@ -19,7 +31,14 @@
      id-token: write
    ```
 
-3. **Использован новый метод деплоя**:
+3. **Добавлен environment**:
+   ```yaml
+   environment:
+     name: github-pages
+     url: ${{ steps.deployment.outputs.page_url }}
+   ```
+
+4. **Использован новый метод деплоя**:
    - `actions/configure-pages@v4`
    - `actions/upload-pages-artifact@v3`
    - `actions/deploy-pages@v4`
@@ -67,3 +86,4 @@ gh-pages -d dist
 2. Проверьте статус в Actions
 3. Откройте ваш сайт на GitHub Pages
 4. Проверьте консоль браузера на ошибки
+
