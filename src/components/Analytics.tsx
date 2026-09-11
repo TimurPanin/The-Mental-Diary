@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Calendar, 
+import {
+  BarChart3,
+  TrendingUp,
   Target,
   Activity,
   Heart,
@@ -150,11 +149,11 @@ const EmptyText = styled.p`
 `;
 
 interface AnalyticsProps {
-  data: AnalyticsData | null;
+  analytics: AnalyticsData | null;
 }
 
-const Analytics: React.FC<AnalyticsProps> = ({ data }) => {
-  if (!data || data.totalEntries === 0) {
+const Analytics: React.FC<AnalyticsProps> = ({ analytics }) => {
+  if (!analytics || analytics.totalEntries === 0) {
     return (
       <AnalyticsContainer
         initial={{ opacity: 0, y: 20 }}
@@ -171,24 +170,6 @@ const Analytics: React.FC<AnalyticsProps> = ({ data }) => {
       </AnalyticsContainer>
     );
   }
-
-  const getMoodColor = (mood: number) => {
-    if (mood >= 8) return theme.colors.success[500];
-    if (mood >= 6) return theme.colors.warning[500];
-    return theme.colors.error[500];
-  };
-
-  const getEnergyColor = (energy: number) => {
-    if (energy >= 8) return theme.colors.success[500];
-    if (energy >= 6) return theme.colors.warning[500];
-    return theme.colors.error[500];
-  };
-
-  const getStressColor = (stress: number) => {
-    if (stress <= 3) return theme.colors.success[500];
-    if (stress <= 6) return theme.colors.warning[500];
-    return theme.colors.error[500];
-  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -207,65 +188,53 @@ const Analytics: React.FC<AnalyticsProps> = ({ data }) => {
       </Header>
 
       <StatsGrid>
-        <StatCard
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.2 }}
-        >
+        <StatCard whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
           <StatHeader>
             <StatIcon color={theme.colors.primary[600]}>
               <Heart size={24} />
             </StatIcon>
             <StatInfo>
               <StatLabel>Среднее настроение</StatLabel>
-              <StatValue>{data.averageMood.toFixed(1)}</StatValue>
+              <StatValue>{analytics.averageMood.toFixed(1)}</StatValue>
               <StatDescription>из 10 возможных</StatDescription>
             </StatInfo>
           </StatHeader>
         </StatCard>
 
-        <StatCard
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.2 }}
-        >
+        <StatCard whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
           <StatHeader>
             <StatIcon color={theme.colors.warning[600]}>
               <Zap size={24} />
             </StatIcon>
             <StatInfo>
               <StatLabel>Средняя энергия</StatLabel>
-              <StatValue>{data.averageEnergy.toFixed(1)}</StatValue>
+              <StatValue>{analytics.averageEnergy.toFixed(1)}</StatValue>
               <StatDescription>из 10 возможных</StatDescription>
             </StatInfo>
           </StatHeader>
         </StatCard>
 
-        <StatCard
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.2 }}
-        >
+        <StatCard whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
           <StatHeader>
             <StatIcon color={theme.colors.error[600]}>
               <AlertTriangle size={24} />
             </StatIcon>
             <StatInfo>
               <StatLabel>Средний стресс</StatLabel>
-              <StatValue>{data.averageStress.toFixed(1)}</StatValue>
+              <StatValue>{analytics.averageStress.toFixed(1)}</StatValue>
               <StatDescription>из 10 возможных</StatDescription>
             </StatInfo>
           </StatHeader>
         </StatCard>
 
-        <StatCard
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.2 }}
-        >
+        <StatCard whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
           <StatHeader>
             <StatIcon color={theme.colors.success[600]}>
               <Target size={24} />
             </StatIcon>
             <StatInfo>
               <StatLabel>Дней подряд</StatLabel>
-              <StatValue>{data.streakDays}</StatValue>
+              <StatValue>{analytics.streakDays}</StatValue>
               <StatDescription>записей в дневнике</StatDescription>
             </StatInfo>
           </StatHeader>
@@ -279,20 +248,11 @@ const Analytics: React.FC<AnalyticsProps> = ({ data }) => {
         </ChartTitle>
         <ChartContainer>
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data.moodTrend}>
+            <LineChart data={analytics.moodTrend}>
               <CartesianGrid strokeDasharray="3 3" stroke={theme.colors.border.light} />
-              <XAxis 
-                dataKey="date" 
-                tickFormatter={formatDate}
-                stroke={theme.colors.text.tertiary}
-                fontSize={12}
-              />
-              <YAxis 
-                stroke={theme.colors.text.tertiary}
-                fontSize={12}
-                domain={[0, 10]}
-              />
-              <Tooltip 
+              <XAxis dataKey="date" tickFormatter={formatDate} stroke={theme.colors.text.tertiary} fontSize={12} />
+              <YAxis stroke={theme.colors.text.tertiary} fontSize={12} domain={[0, 10]} />
+              <Tooltip
                 contentStyle={{
                   backgroundColor: theme.colors.background.primary,
                   border: `1px solid ${theme.colors.border.medium}`,
@@ -300,26 +260,26 @@ const Analytics: React.FC<AnalyticsProps> = ({ data }) => {
                 }}
                 labelFormatter={formatDate}
               />
-              <Line 
-                type="monotone" 
-                dataKey="mood" 
-                stroke={theme.colors.primary[600]} 
+              <Line
+                type="monotone"
+                dataKey="mood"
+                stroke={theme.colors.primary[600]}
                 strokeWidth={3}
                 dot={{ fill: theme.colors.primary[600], strokeWidth: 2, r: 4 }}
                 activeDot={{ r: 6, stroke: theme.colors.primary[600], strokeWidth: 2 }}
               />
-              <Line 
-                type="monotone" 
-                dataKey="energy" 
-                stroke={theme.colors.warning[600]} 
+              <Line
+                type="monotone"
+                dataKey="energy"
+                stroke={theme.colors.warning[600]}
                 strokeWidth={2}
                 dot={{ fill: theme.colors.warning[600], strokeWidth: 2, r: 3 }}
                 activeDot={{ r: 5, stroke: theme.colors.warning[600], strokeWidth: 2 }}
               />
-              <Line 
-                type="monotone" 
-                dataKey="stress" 
-                stroke={theme.colors.error[600]} 
+              <Line
+                type="monotone"
+                dataKey="stress"
+                stroke={theme.colors.error[600]}
                 strokeWidth={2}
                 dot={{ fill: theme.colors.error[600], strokeWidth: 2, r: 3 }}
                 activeDot={{ r: 5, stroke: theme.colors.error[600], strokeWidth: 2 }}
@@ -336,20 +296,11 @@ const Analytics: React.FC<AnalyticsProps> = ({ data }) => {
         </ChartTitle>
         <ChartContainer>
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={data.moodTrend.slice(-7)}>
+            <BarChart data={analytics.moodTrend.slice(-7)}>
               <CartesianGrid strokeDasharray="3 3" stroke={theme.colors.border.light} />
-              <XAxis 
-                dataKey="date" 
-                tickFormatter={formatDate}
-                stroke={theme.colors.text.tertiary}
-                fontSize={12}
-              />
-              <YAxis 
-                stroke={theme.colors.text.tertiary}
-                fontSize={12}
-                domain={[0, 10]}
-              />
-              <Tooltip 
+              <XAxis dataKey="date" tickFormatter={formatDate} stroke={theme.colors.text.tertiary} fontSize={12} />
+              <YAxis stroke={theme.colors.text.tertiary} fontSize={12} domain={[0, 10]} />
+              <Tooltip
                 contentStyle={{
                   backgroundColor: theme.colors.background.primary,
                   border: `1px solid ${theme.colors.border.medium}`,
@@ -357,11 +308,7 @@ const Analytics: React.FC<AnalyticsProps> = ({ data }) => {
                 }}
                 labelFormatter={formatDate}
               />
-              <Bar 
-                dataKey="mood" 
-                fill={theme.colors.primary[600]}
-                radius={[4, 4, 0, 0]}
-              />
+              <Bar dataKey="mood" fill={theme.colors.primary[600]} radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </ChartContainer>
