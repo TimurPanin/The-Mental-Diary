@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Heart, Shield, Lock, Mail, User } from 'lucide-react';
-import { useJournalStore } from '../hooks/useTimer';
+import { Heart, Database, BarChart3, Mail, User } from 'lucide-react';
 import { theme } from '../styles/theme';
 import DisclaimerModal from './DisclaimerModal';
 
@@ -115,7 +114,7 @@ const Button = styled(motion.button)<{ variant?: 'primary' | 'secondary' }>`
       ? `
         background: ${theme.colors.primary[600]};
         color: ${theme.colors.text.inverse};
-        
+
         &:hover {
           background: ${theme.colors.primary[700]};
           transform: translateY(-1px);
@@ -126,7 +125,7 @@ const Button = styled(motion.button)<{ variant?: 'primary' | 'secondary' }>`
         background: transparent;
         color: ${theme.colors.text.primary};
         border-color: ${theme.colors.border.medium};
-        
+
         &:hover {
           background: ${theme.colors.background.secondary};
           border-color: ${theme.colors.primary[500]};
@@ -175,10 +174,9 @@ const DisclaimerLink = styled.button`
 
 interface LoginScreenProps {
   onLogin: (email?: string) => void;
-  onShowDisclaimer?: () => void;
 }
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onShowDisclaimer }) => {
+const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
 
@@ -194,7 +192,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onShowDisclaimer }) 
   };
 
   const handleEmailLogin = async () => {
-    const email = prompt('Введите ваш email (необязательно):');
+    const email = prompt('Введите email для локального профиля (необязательно):');
     if (email !== null) {
       setIsLoading(true);
       try {
@@ -222,22 +220,22 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onShowDisclaimer }) 
           <LogoIcon />
           <div>
             <Title>Ментальный дневник</Title>
-            <Subtitle>Заботимся о вашем психическом здоровье</Subtitle>
+            <Subtitle>Прототип дневника настроения и самонаблюдения</Subtitle>
           </div>
         </Logo>
 
         <Features>
           <Feature>
             <FeatureIcon>
-              <Shield size={20} />
+              <Database size={20} />
             </FeatureIcon>
-            <FeatureText>Конфиденциальность</FeatureText>
+            <FeatureText>Локальное хранение</FeatureText>
           </Feature>
           <Feature>
             <FeatureIcon>
-              <Lock size={20} />
+              <BarChart3 size={20} />
             </FeatureIcon>
-            <FeatureText>Шифрование данных</FeatureText>
+            <FeatureText>Графики и аналитика</FeatureText>
           </Feature>
           <Feature>
             <FeatureIcon>
@@ -249,7 +247,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onShowDisclaimer }) 
             <FeatureIcon>
               <User size={20} />
             </FeatureIcon>
-            <FeatureText>Анонимность</FeatureText>
+            <FeatureText>Локальный профиль</FeatureText>
           </Feature>
         </Features>
 
@@ -262,7 +260,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onShowDisclaimer }) 
             whileTap={{ scale: 0.98 }}
           >
             <User size={20} />
-            Начать анонимно
+            Начать локально
           </Button>
 
           <Button
@@ -273,29 +271,27 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onShowDisclaimer }) 
             whileTap={{ scale: 0.98 }}
           >
             <Mail size={20} />
-            Войти с email
+            Указать email локально
           </Button>
         </ButtonGroup>
 
         <PrivacyNote>
-          Ваши данные хранятся локально на вашем устройстве и зашифрованы. 
-          Мы не имеем доступа к вашей личной информации.
+          Данные приложения сохраняются в localStorage этого браузера. Это демонстрационный проект: не используйте его для хранения чувствительной или медицинской информации. Серверной синхронизации нет.
         </PrivacyNote>
 
         <DisclaimerNote>
           <DisclaimerText>
-            Данный сервис предназначен исключительно для личного использования и не является медицинской или психотерапевтической помощью. 
-            Мы не предоставляем диагностику, лечение или иные медицинские услуги.
+            Проект предназначен для демонстрации интерфейса и логики дневника. Он не выполняет медицинскую диагностику и не заменяет профессиональную помощь.
           </DisclaimerText>
           <DisclaimerLink onClick={() => setShowDisclaimer(true)}>
-            Подробнее об отказе от ответственности
+            Подробнее об ограничениях проекта
           </DisclaimerLink>
         </DisclaimerNote>
       </LoginCard>
-      
-      <DisclaimerModal 
-        isOpen={showDisclaimer} 
-        onClose={() => setShowDisclaimer(false)} 
+
+      <DisclaimerModal
+        isOpen={showDisclaimer}
+        onClose={() => setShowDisclaimer(false)}
       />
     </LoginContainer>
   );
