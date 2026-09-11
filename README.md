@@ -50,7 +50,7 @@ For that reason, this project should be treated as a UI/engineering prototype ra
 - **date-fns**
 - **Lucide React**
 - **React Hot Toast**
-- **CryptoJS** — experimental local-data helper, not a security boundary
+- **CryptoJS** - experimental local-data helper, not a security boundary
 
 ## Project structure
 
