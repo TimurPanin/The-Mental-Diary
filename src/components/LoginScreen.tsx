@@ -174,6 +174,7 @@ const DisclaimerLink = styled.button`
 
 interface LoginScreenProps {
   onLogin: (email?: string) => void;
+  onShowDisclaimer?: () => void;
 }
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
