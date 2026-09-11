@@ -2,7 +2,7 @@
   "name": "mental-diary",
   "version": "1.0.0",
   "private": true,
-  "description": "Client-side mood journaling prototype built with React and TypeScript",
+  "description": "Client-side mood journaling prototype built with React, TypeScript, Zustand and Recharts.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
