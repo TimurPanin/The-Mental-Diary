@@ -1,13 +1,14 @@
 {
-  "name": "mental-health-journal",
+  "name": "mental-diary",
   "version": "1.0.0",
-  "description": "Modern online mental health journal with mood tracking and AI support",
-  "main": "index.js",
+  "private": true,
+  "description": "Client-side mood journaling prototype built with React and TypeScript",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite"
+    "start": "vite",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -31,7 +32,13 @@
     "typescript": "^5.2.2",
     "vite": "^4.5.0"
   },
-  "keywords": ["react", "mental-health", "journal", "mood-tracking", "typescript"],
-  "author": "Your Name",
-  "license": "MIT"
+  "keywords": [
+    "react",
+    "typescript",
+    "journal",
+    "mood-tracker",
+    "data-visualization",
+    "local-storage"
+  ],
+  "author": "Timur Panin"
 }
