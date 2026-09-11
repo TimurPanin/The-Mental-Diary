@@ -1,12 +1,4 @@
-export { TimeLeft } from '../utils/timerUtils'
-export { Theme } from '../styles/theme'
-
-export interface TimerState {
-  isRunning: boolean
-  isPaused: boolean
-  timeLeft: TimeLeft
-  totalSeconds: number
-}
+export type { Theme } from '../styles/theme';
 
 export interface User {
   id: string;
@@ -30,8 +22,8 @@ export interface JournalEntry {
   date: Date;
   content: string;
   mood: MoodType;
-  energyLevel: number; // 1-10
-  stressLevel: number; // 1-10
+  energyLevel: number;
+  stressLevel: number;
   tags: string[];
   createdAt: Date;
   updatedAt: Date;
@@ -39,7 +31,7 @@ export interface JournalEntry {
   monthlyTheme?: string;
 }
 
-export type MoodType = 
+export type MoodType =
   | '😊' | '😄' | '😌' | '😐' | '😔' | '😢' | '😡' | '😰' | '😴' | '🤗';
 
 export interface MoodData {
@@ -83,8 +75,6 @@ export interface Reminder {
   message: string;
 }
 
-// Новые типы для дополнительных функций
-
 export interface MonthlyTheme {
   id: string;
   title: string;
@@ -117,7 +107,7 @@ export interface AIAnalysis {
 
 export interface EmotionScore {
   emotion: string;
-  score: number; // 0-1
+  score: number;
   intensity: 'low' | 'medium' | 'high';
 }
 
@@ -140,7 +130,7 @@ export interface MicroExercise {
   title: string;
   description: string;
   type: 'breathing' | 'meditation' | 'physical' | 'mindfulness';
-  duration: number; // в минутах
+  duration: number;
   difficulty: 'easy' | 'medium' | 'hard';
   videoUrl?: string;
   instructions: string[];
@@ -162,7 +152,7 @@ export interface MoodBoosterTask {
   title: string;
   description: string;
   category: 'social' | 'physical' | 'creative' | 'self_care' | 'learning';
-  estimatedTime: number; // в минутах
+  estimatedTime: number;
   energyLevel: 'low' | 'medium' | 'high';
   completed: boolean;
   completedDate?: Date;
