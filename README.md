@@ -1,5 +1,7 @@
 # Mental Diary
 
+[![CI](https://github.com/TimurPanin/The-Mental-Diary/actions/workflows/ci.yml/badge.svg)](https://github.com/TimurPanin/The-Mental-Diary/actions/workflows/ci.yml)
+
 A client-side journaling and mood-tracking prototype built with **React 18**, **TypeScript** and **Vite**.
 
 The project focuses on frontend architecture, local state management, journaling workflows, data visualization, export/backup flows and deterministic text analysis.
