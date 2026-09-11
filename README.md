@@ -1,159 +1,134 @@
-# Ментальный дневник
+# Mental Diary
 
-Современное веб-приложение для отслеживания психического здоровья, настроения и эмоций. Помогает пользователям формировать привычку самонаблюдения и получать мягкую поддержку через подсказки и аналитику.
+A client-side journaling and mood-tracking prototype built with **React 18**, **TypeScript** and **Vite**.
 
-## 🌟 Особенности
+The project focuses on frontend architecture, local state management, journaling workflows, data visualization, export/backup flows and deterministic text analysis.
 
-### Основные функции (MVP)
-- **Анонимная регистрация** - вход без указания реального имени
-- **Шифрование данных** - все данные хранятся локально и зашифрованы
-- **Записи в дневник** - текстовые записи с эмодзи-настроениями
-- **Отслеживание метрик** - уровень энергии и стресса по шкале 1-10
-- **AI-подсказки** - поддерживающие сообщения и вопросы для размышления
-- **Аналитика** - графики и статистика настроения
-- **Теги** - категоризация записей
+> This is a portfolio/learning project, not a medical product. Do not use it as secure storage for sensitive or medical information.
 
-### Технические особенности
-- **Современный стек** - React 18, TypeScript, Vite
-- **Стилизация** - Styled Components с темной/светлой темой
-- **Анимации** - Framer Motion для плавных переходов
-- **Графики** - Recharts для визуализации данных
-- **Состояние** - Zustand для управления состоянием
-- **Безопасность** - CryptoJS для шифрования данных
-- **Адаптивность** - мобильная версия и PWA
+## What is implemented
 
-## 🚀 Быстрый старт
+- Journal entries with text, mood, energy and stress values
+- Tags for organizing entries
+- Editing and deleting entries
+- Local browser persistence with Zustand
+- Mood, energy and stress analytics
+- 30-day trend visualization with Recharts
+- Entry streak tracking
+- Reflection prompts and predefined supportive messages
+- Keyword-based text analysis and simple emotional-pattern heuristics
+- Monthly themes, exercises and mood-booster tasks
+- Data export and backup/restore flows
+- Responsive interface with Styled Components and Framer Motion
+- GitHub Pages deployment workflow
 
-### Установка зависимостей
-```bash
-npm install
+## Text analysis: important clarification
+
+The project does **not** use an LLM, neural network or external AI service.
+
+Text analysis is deterministic and runs locally. It matches predefined keywords, calculates simple scores and selects predefined recommendations or reflection prompts. Some internal identifiers still use the older `AI*` naming, but the current implementation is rule-based rather than machine-learning based.
+
+## Data and privacy model
+
+The application has no backend, cloud account system or server-side database. Application state is persisted in the browser through Zustand/localStorage.
+
+The repository also contains an experimental CryptoJS helper with a static client-side key. A key embedded in frontend source code is **not a meaningful security boundary**, and the active Zustand persistence should not be treated as encrypted secure storage.
+
+For that reason, this project should be treated as a UI/engineering prototype rather than a production system for confidential information.
+
+## Tech stack
+
+- **React 18**
+- **TypeScript**
+- **Vite**
+- **Zustand**
+- **Styled Components**
+- **Framer Motion**
+- **Recharts**
+- **date-fns**
+- **Lucide React**
+- **React Hot Toast**
+- **CryptoJS** — experimental local-data helper, not a security boundary
+
+## Project structure
+
+```text
+src/
+├── components/
+│   ├── Analytics.tsx
+│   ├── DisclaimerModal.tsx
+│   ├── ExportData.tsx
+│   ├── JournalEntryForm.tsx
+│   ├── JournalEntryList.tsx
+│   ├── LoginScreen.tsx
+│   ├── MicroExercises.tsx
+│   └── MonthlyThemes.tsx
+├── constants/
+│   └── index.ts
+├── hooks/
+│   └── useTimer.ts
+├── styles/
+│   ├── GlobalStyles.ts
+│   ├── animations.ts
+│   ├── mediaQueries.ts
+│   └── theme.ts
+├── types/
+│   └── index.ts
+├── utils/
+│   └── timerUtils.ts
+├── App.tsx
+└── main.tsx
 ```
 
-### Запуск в режиме разработки
+## Architecture notes
+
+`useTimer.ts` contains the Zustand store and coordinates journal entries, analytics, local persistence, suggestions, themes, exercises and export/restore operations.
+
+`timerUtils.ts` contains validation, date utilities, analytics calculations, deterministic keyword analysis and data-export helpers.
+
+UI concerns are separated into React components, while reusable styling is centralized under `src/styles`.
+
+## Run locally
+
+### Requirements
+
+- Node.js 20+
+- npm
+
+### Install
+
+```bash
+npm ci
+```
+
+### Development
+
 ```bash
 npm run dev
 ```
 
-### Сборка для продакшена
+### Type check
+
+```bash
+npm run type-check
+```
+
+### Production build
+
 ```bash
 npm run build
 ```
 
-### Предварительный просмотр сборки
-```bash
-npm run preview
-```
+## Scope
 
-## 📁 Структура проекта
+This repository is useful as an example of:
 
-```
-src/
-├── components/          # React компоненты
-│   ├── CountdownTimer.tsx    # Экран входа
-│   ├── ProgressRing.tsx      # Форма записи в дневник
-│   ├── TimeDisplay.tsx       # Список записей
-│   └── TimerControls.tsx     # Аналитика
-├── hooks/              # Пользовательские хуки
-│   └── useTimer.ts           # Store для управления состоянием
-├── styles/             # Стили и темы
-│   ├── GlobalStyles.ts       # Глобальные стили
-│   └── theme.ts              # Тема приложения
-├── types/              # TypeScript типы
-│   └── index.ts              # Интерфейсы и типы
-├── utils/              # Утилиты
-│   └── timerUtils.ts         # Функции для работы с данными
-├── constants/          # Константы
-│   └── index.ts              # Конфигурация и константы
-├── App.tsx             # Главный компонент
-└── main.tsx            # Точка входа
-```
+- React + TypeScript application structure
+- Zustand state management
+- browser persistence
+- chart-based data visualization
+- form-heavy UI flows
+- local export/backup logic
+- rule-based text processing
 
-## 🎨 Дизайн
-
-Приложение использует современный дизайн с:
-- **Цветовая схема** - голубые и фиолетовые оттенки
-- **Типографика** - Inter и Poppins шрифты
-- **Анимации** - плавные переходы и микровзаимодействия
-- **Адаптивность** - поддержка всех устройств
-- **Доступность** - WCAG 2.1 AA стандарты
-
-## 🔒 Безопасность
-
-- **Локальное хранение** - все данные хранятся в браузере
-- **Шифрование** - AES шифрование для всех данных
-- **Анонимность** - не требуется регистрация с личными данными
-- **Приватность** - данные не передаются на сервер
-
-## 📊 Функции аналитики
-
-- **Тренд настроения** - график за последние 30 дней
-- **Средние показатели** - настроение, энергия, стресс
-- **Дни подряд** - подсчет последовательных записей
-- **Распределение** - гистограмма настроения
-
-## 🤖 AI-подсказки
-
-Система генерирует:
-- **Поддерживающие сообщения** для новых пользователей
-- **Вопросы для размышления** для опытных пользователей
-- **Персонализированные советы** на основе истории
-
-## 📱 PWA возможности
-
-- **Офлайн работа** - приложение работает без интернета
-- **Установка** - можно установить как нативное приложение
-- **Push-уведомления** - напоминания о записях
-- **Адаптивный дизайн** - оптимизация для мобильных устройств
-
-## 🛠 Технологии
-
-- **Frontend**: React 18, TypeScript
-- **Стилизация**: Styled Components
-- **Анимации**: Framer Motion
-- **Графики**: Recharts
-- **Состояние**: Zustand
-- **Сборка**: Vite
-- **Шифрование**: CryptoJS
-- **Уведомления**: React Hot Toast
-
-## 📈 Планы развития
-
-### Версия 2.0
-- [ ] Напоминания и уведомления
-- [ ] Экспорт/импорт данных
-- [ ] Темная тема
-- [ ] Мобильное приложение
-
-### Версия 3.0
-- [ ] Социальные функции
-- [ ] Групповые дневники
-- [ ] Интеграция с календарем
-- [ ] Расширенная аналитика
-
-## 🤝 Вклад в проект
-
-1. Форкните репозиторий
-2. Создайте ветку для новой функции
-3. Внесите изменения
-4. Создайте Pull Request
-
-## 📄 Лицензия
-
-MIT License - см. файл [LICENSE](LICENSE) для деталей.
-
-## 🆘 Поддержка
-
-Если у вас есть вопросы или предложения:
-- Создайте Issue в GitHub
-- Напишите на email: support@mental-health-journal.app
-
-## 🙏 Благодарности
-
-- [React](https://reactjs.org/) - за отличную библиотеку
-- [Framer Motion](https://www.framer.com/motion/) - за анимации
-- [Recharts](https://recharts.org/) - за графики
-- [Lucide](https://lucide.dev/) - за иконки
-
----
-
-**Важно**: Это приложение не заменяет профессиональную медицинскую помощь. Если вы испытываете серьезные проблемы с психическим здоровьем, обратитесь к специалисту.
+It intentionally does not claim clinical accuracy, secure storage, machine-learning analysis or professional medical functionality.
