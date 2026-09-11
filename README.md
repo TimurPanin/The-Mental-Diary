@@ -4,16 +4,16 @@
 
 A client-side journaling and mood-tracking prototype built with **React 18**, **TypeScript** and **Vite**.
 
-The project focuses on frontend architecture, local state management, journaling workflows, data visualization, export/backup flows and deterministic text analysis.
+The project focuses on frontend architecture, local state management, journaling workflows, data visualization, export and backup flows, and deterministic text analysis.
 
-> This is a portfolio/learning project, not a medical product. Do not use it as secure storage for sensitive or medical information.
+> This is a portfolio and learning project, not a medical product. Do not use it as secure storage for sensitive or medical information.
 
 ## What is implemented
 
 - Journal entries with text, mood, energy and stress values
 - Tags for organizing entries
 - Editing and deleting entries
-- Local browser persistence with Zustand
+- Local browser persistence with Zustand and `localStorage`
 - Mood, energy and stress analytics
 - 30-day trend visualization with Recharts
 - Entry streak tracking
@@ -32,11 +32,11 @@ Text analysis is deterministic and runs locally. It matches predefined keywords,
 
 ## Data and privacy model
 
-The application has no backend, cloud account system or server-side database. Application state is persisted in the browser through Zustand/localStorage.
+The application has no backend, cloud account system or server-side database. Application state is persisted in the browser through Zustand with `localStorage`.
 
 The repository also contains an experimental CryptoJS helper with a static client-side key. A key embedded in frontend source code is **not a meaningful security boundary**, and the active Zustand persistence should not be treated as encrypted secure storage.
 
-For that reason, this project should be treated as a UI/engineering prototype rather than a production system for confidential information.
+For that reason, this project should be treated as a UI and engineering prototype rather than a production system for confidential information.
 
 ## Tech stack
 
@@ -84,7 +84,7 @@ src/
 
 ## Architecture notes
 
-`useTimer.ts` contains the Zustand store and coordinates journal entries, analytics, local persistence, suggestions, themes, exercises and export/restore operations.
+`useTimer.ts` contains the Zustand store and coordinates journal entries, analytics, local persistence, suggestions, themes, exercises and export and restore operations.
 
 `timerUtils.ts` contains validation, date utilities, analytics calculations, deterministic keyword analysis and data-export helpers.
 
@@ -125,12 +125,12 @@ npm run build
 
 This repository is useful as an example of:
 
-- React + TypeScript application structure
+- React and TypeScript application structure
 - Zustand state management
-- browser persistence
-- chart-based data visualization
-- form-heavy UI flows
-- local export/backup logic
-- rule-based text processing
+- Browser persistence
+- Chart-based data visualization
+- Form-heavy UI flows
+- Local export and backup logic
+- Rule-based text processing
 
 It intentionally does not claim clinical accuracy, secure storage, machine-learning analysis or professional medical functionality.
